@@ -5,22 +5,33 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.aws.codestar.projecttemplates.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-@Controller
+@RestController
+@RequestMapping("/")
 public class ProvideImageController {
 
+    private static final String MESSAGE_FORMAT = "Hello %s!";
 
-    @RequestMapping("/getDirs/{eventName}")
+    @RequestMapping(method = RequestMethod.GET)
+    public Response helloWorldGet(@RequestParam(value = "name", defaultValue = "World") String name) {
+        return new Response(String.format(MESSAGE_FORMAT, name));
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public Response helloWorldPost(@RequestParam(value = "name", defaultValue = "World") String name) {
+        return new Response(String.format(MESSAGE_FORMAT, name));
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/getDirs/{eventName}")
     public ResponseEntity<?> getDirs(Map<String, List> model, @PathVariable String eventName) {
 
         List<String> dirs = new ArrayList<String>();
@@ -33,7 +44,7 @@ public class ProvideImageController {
         return new ResponseEntity(model, HttpStatus.OK);
     }
 
-    @RequestMapping("/getImagesList/{eventName}/{dirName}/{from}/{to}")
+    @RequestMapping(method = RequestMethod.GET, value = "/getImagesList/{eventName}/{dirName}/{from}/{to}")
     public ResponseEntity<?> getImagesList(Map<String, List> model,
                                            @PathVariable String eventName,
                                            @PathVariable String dirName,
@@ -58,7 +69,7 @@ public class ProvideImageController {
         return new ResponseEntity(model, HttpStatus.OK);
     }
 
-    @RequestMapping("/getImageUrl/{eventName}/{dirName}/{imageName}")
+    @RequestMapping(method = RequestMethod.GET, value = "/getImageUrl/{eventName}/{dirName}/{imageName}")
     public ResponseEntity<?> getImageUrl(Map<String, String> model,
                                          @PathVariable String eventName,
                                          @PathVariable String dirName,

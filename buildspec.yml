@@ -24,7 +24,7 @@ artifacts:
   files:
     - 'ROOT/WEB-INF/classes/com/aws/codestar/projecttemplates/Application.class'
     - 'ROOT/WEB-INF/classes/com/aws/codestar/projecttemplates/Response.class'
-    - 'ROOT/WEB-INF/classes/com/aws/codestar/projecttemplates/controller/HelloWorldController.class'
+    - 'ROOT/WEB-INF/classes/com/aws/codestar/projecttemplates/controller/ProvideImageController.class'
     - 'ROOT/WEB-INF/lib/classmate-1.3.3.jar'
     - 'ROOT/WEB-INF/lib/hibernate-validator-5.2.4.Final.jar'
     - 'ROOT/WEB-INF/lib/jackson-annotations-2.8.5.jar'
