@@ -21,12 +21,7 @@ public class ProvideImageController {
 
     private static final String MESSAGE_FORMAT = "Hello %s!";
 
-    @RequestMapping(method = RequestMethod.GET, value = "/")
-    public Response helloWorldGet(@RequestParam(value = "name", defaultValue = "World") String name) {
-        return new Response(String.format(MESSAGE_FORMAT, name));
-    }
-
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST, value = "/")
     public Response helloWorldPost(@RequestParam(value = "name", defaultValue = "World") String name) {
         return new Response(String.format(MESSAGE_FORMAT, name));
     }
