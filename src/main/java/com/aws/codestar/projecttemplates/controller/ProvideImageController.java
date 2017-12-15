@@ -21,7 +21,7 @@ public class ProvideImageController {
 
     private static final String MESSAGE_FORMAT = "Hello %s!";
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET, value = "/")
     public Response helloWorldGet(@RequestParam(value = "name", defaultValue = "World") String name) {
         return new Response(String.format(MESSAGE_FORMAT, name));
     }
@@ -32,7 +32,7 @@ public class ProvideImageController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/getDirs/{eventName}")
-    public ResponseEntity<?> getDirs(Map<String, List> model, @PathVariable String eventName) {
+    public Response getDirs(Map<String, List> model, @PathVariable String eventName) {
 
         List<String> dirs = new ArrayList<String>();
         dirs.add("Originals");
@@ -41,11 +41,11 @@ public class ProvideImageController {
         dirs.add("Thumbnails");
         model.put("dirs", dirs);
 
-        return new ResponseEntity(model, HttpStatus.OK);
+        return new Response(model.toString());
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/getImagesList/{eventName}/{dirName}/{from}/{to}")
-    public ResponseEntity<?> getImagesList(Map<String, List> model,
+    public Response getImagesList(Map<String, List> model,
                                            @PathVariable String eventName,
                                            @PathVariable String dirName,
                                            @PathVariable String from,
@@ -66,11 +66,11 @@ public class ProvideImageController {
         }
         model.put("images", imageList);
 
-        return new ResponseEntity(model, HttpStatus.OK);
+        return new Response(model.toString());
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/getImageUrl/{eventName}/{dirName}/{imageName}")
-    public ResponseEntity<?> getImageUrl(Map<String, String> model,
+    public Response getImageUrl(Map<String, String> model,
                                          @PathVariable String eventName,
                                          @PathVariable String dirName,
                                          @PathVariable String imageName) {
@@ -81,7 +81,7 @@ public class ProvideImageController {
         String url = "http://events.cabinawtf.ro/"+eventName+"/"+dirName+"/"+imageName+".jpg";
         model.put("imageUrl", url);
 
-        return new ResponseEntity(model, HttpStatus.OK);
+        return new Response(model.toString());
     }
 
 }
